@@ -33,7 +33,7 @@ function ScoreState:render()
     love.graphics.setFont(mediumFont)
     love.graphics.printf('Score: ' .. tostring(self.score), 0, 100, VIRTUAL_WIDTH, 'center')
     --MEDALS GRAPHIC###############################################################################
-    if self.score>5 then
+    if self.score>5 and self.score<100 then
         if self.score>5 then
             medal=love.graphics.newImage('medal1.png')
         elseif self.score>10 then
@@ -46,15 +46,30 @@ function ScoreState:render()
             medal=love.graphics.newImage('medal5.png')
         elseif self.score>60 then
             medal=love.graphics.newImage('medal6.png')
-        elseif self.score>100 then
-            love.graphics.setColor(0, 0, 1)
-            love.graphics.setFont(flappyFont)
-            love.graphics.printf('You are indescribable!', 0, 140, VIRTUAL_WIDTH, 'center')
         end
         ximg=medal:getWidth()
         love.graphics.draw(medal,  VIRTUAL_WIDTH/2-ximg/4, 130, 0, 1/2, 1/2)
+    elseif self.score>100 then
+        half=VIRTUAL_WIDTH/30
+        le=30 --leter 28 but 30
+        love.graphics.setFont(flappyFont)
+        love.graphics.setColor(255, 0, 0) --red
+        love.graphics.printf('E', half-105, 140, VIRTUAL_WIDTH, 'center')
+        love.graphics.setColor(255, 128, 0) --orange
+        love.graphics.printf('X', half-(le*2.5), 140, VIRTUAL_WIDTH, 'center')
+        love.graphics.setColor(255, 255, 51) --yellow
+        love.graphics.printf('T', half-(le*1.5), 140, VIRTUAL_WIDTH, 'center')
+        love.graphics.setColor(0, 204, 0) --green
+        love.graphics.printf('R', half-(le*0.5), 140, VIRTUAL_WIDTH, 'center')
+        love.graphics.setColor(153, 204, 255) -- light blue
+        love.graphics.printf('E', half+(le*0.5), 140, VIRTUAL_WIDTH, 'center')
+        love.graphics.setColor(0, 0, 255) --blue
+        love.graphics.printf('M', half+(le*1.5), 140, VIRTUAL_WIDTH, 'center')
+        love.graphics.setColor(153, 0, 153) --purple
+        love.graphics.printf('E', half+(le*2.5), 140, VIRTUAL_WIDTH, 'center')
+        
     else
-        love.graphics.setColor(1, 0, 0)
+        love.graphics.setColor(255, 255, 0)
         love.graphics.setFont(flappyFont)
         love.graphics.printf('You can better!', 0, 140, VIRTUAL_WIDTH, 'center')
     end
